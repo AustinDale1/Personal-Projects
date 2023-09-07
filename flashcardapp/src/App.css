@@ -1,0 +1,41 @@
+.main{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.mainButton{
+    float: left;
+}
+
+.button  {
+	height: 373px;
+	width: 210px;
+	color: #000000;
+	background-color: transparent;
+	cursor: pointer;
+    border-radius: 8px;
+}
+
+.buttony  {
+	height: 100px;
+	width: 100px;
+	color: #000000;
+	background-color: transparent;
+	cursor: pointer;
+    border-radius: 8px;
+}
+
+.button:hover {background-color: #ccf1ff}
+
+.button:active {
+    background-color: #053647;
+    color: #ffffff;
+  }
+
+  .buttony:hover {background-color: #ccf1ff}
+
+  .buttony:active {
+    background-color: #053647;
+    color: #ffffff;
+  }
