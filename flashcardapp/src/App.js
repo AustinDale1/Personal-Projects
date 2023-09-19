@@ -12,7 +12,7 @@ function App() {
 function Landing(){
   const [cards, setCards] = useState([]);
   const [cards2, setCards2] = useState([]);
-  //0 is landing, 1 is create, 2 is review, 3 is bulkUpload, 4 is file upload, 5 is edit
+  //0 is landing, 1 is create, 2 is review, 3 is bulkUpload, 4 is file upload
   const [page, setPage] = useState(0);
   const [cardset, setCardset] = useState(0);
 
@@ -41,10 +41,6 @@ function Landing(){
     setPage(4);
   }
 
-  const handleEditClick = () => {
-    setPage(5);
-  }
-
   function CreatePage(){
       if(page === 1){
           return <Create setCards={setCards} cards={cards} page={page} setPage={setPage}/>;
@@ -68,7 +64,6 @@ function Landing(){
               <button className="button" onClick={handleReviewClick}>Review flashcards</button>    
               <button className="button" onClick={handleBulkClick}>Create flashcards in bulk</button>  
               <button className="button" onClick={handleFileClick}>Create flashcards using file</button>
-              <button className="button" onClick={handleEditClick}>Edit flashcards</button>
               {/* <button className="button" onClick={handlePrint}>Print</button>         */}
           </>
           );
@@ -92,15 +87,6 @@ function Landing(){
           return;
         }
       }
-    
-    function EditCardsPage(){
-      if(page === 5){
-            return <EditCards setCards={setCards} cards={cards} setPage={setPage}/>;
-      }
-        else{
-          return;
-        }
-      }
 
   return(
       <div>
@@ -110,7 +96,6 @@ function Landing(){
           <ReviewPage/>
           <BulkUploadPage/>
           <FileUploadPage/>
-          <EditCardsPage/>
       </div>
   );
 }
@@ -173,6 +158,19 @@ function Create({cards, setCards, cards2, setCards2, setPage}){
 function Review({cards, setCards, cards2, setCards2, setPage}){
   const [flip, setFlip] = useState(true);
   const [index, setIndex] = useState(0);
+  const [isEdit, setIsEdit] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const formJson = Object.fromEntries(formData.entries());
+    let newCard = new createFlashcard(formJson.front, formJson.back);
+    let arr = cards;
+    arr[index] = newCard;
+    setCards(cards => arr);
+    setIsEdit(false);
+  }
 
   const handleFlip = () => {
     setFlip(!flip);
@@ -187,6 +185,20 @@ function Review({cards, setCards, cards2, setCards2, setPage}){
     }
   }
 
+  const handleDelete = () => {
+    let c = [
+      ...cards
+    ];
+    for(let i = 0; i < c.length; i++){
+      console.log(c[i].front + " " + c[i].back);
+    }
+    c.splice(index, index+1);
+    for(let i = 0; i < c.length; i++){
+      console.log(c[i].front + " " + c[i].back);
+    }
+    setCards(cards => c);
+  } 
+
   const handleReturn = () => {
     if(index > 0){
       setIndex(index - 1);
@@ -195,6 +207,10 @@ function Review({cards, setCards, cards2, setCards2, setPage}){
       console.log("At first card");
     }
   }
+
+  const handleEdit = () => {
+    setIsEdit(true);
+  } 
 
   //Thx Stack overflow I didn't want to create this method
   const handleShuffle = () => {
@@ -221,15 +237,33 @@ function Review({cards, setCards, cards2, setCards2, setPage}){
   return(
       <div>
           <div className="card">
-              { <h4><b>{displayCard()}</b></h4> }
+            <button className="cardButtonLeft" onClick={handleReturn}>&lt;</button>
+            { <h4><b>{displayCard()}</b></h4> }
+            <button className="cardButtonRight" onClick={handleNext}>&gt;</button>
+            <button className="cardButtonFlip" onClick={handleFlip}>Flip</button>
+            <button className="cardButtonShuffle" onClick={handleShuffle}>Shuffle Deck</button>
+            <button className="cardButtonDelete" onClick={handleDelete}>Delete</button>
+            <button className="cardButtonEdit" onClick={handleEdit}>Edit</button>
           </div>
-          <button className="buttony" onClick={handleFlip}>Flip</button>
-          <button className="buttony" onClick={handleNext}>Next</button>
-          <button className="buttony" onClick={handleReturn}>Return</button>
-          <button className="buttony" onClick={handleShuffle}>Shuffle Deck</button>
-          <button className="buttony" onClick={handleMain}>Main Page</button>
-
-          
+          {isEdit?(
+             <div>
+             <form method="post" onSubmit={handleSubmit}>
+               <label>
+                 Front of the card: <input name="front" defaultValue={cards[index].front}/>
+               </label>
+               <label>
+                 Back of the card: <input name="back" defaultValue={cards[index].back}/>
+               </label>
+               <button type="submit">Submit form</button>
+             </form>
+           </div>
+          ) : (
+            <></>
+          )}
+      <div>
+        {<h4></h4>}
+      </div>
+          <button className="mainButton" onClick={handleMain}>Main Page</button>
       </div>
   );
 }
@@ -366,9 +400,12 @@ function FileUpload({cards, setCards, setPage}){
   return(
     <div>
       <div>
-			  <input type="file" name="file" onChange={changeHandler} />
+        <label htmlFor={"filerInput"} className="filerinput">
+          <input type="file" name="file" id={"filerInput"} onChange={changeHandler}/>
+        </label>
+			  
 			  <div>
-				  <button onClick={handleSubmission}>Submit</button>
+				  <button onClick={handleSubmission} className="filerinput">Submit</button>
           {isFilePicked?(
             <div>
               <p>Filename: {selectedFile.name}</p>
@@ -384,124 +421,6 @@ function FileUpload({cards, setCards, setPage}){
       <button className="buttony" onClick={handleMain}>Main Page</button>
       <button className="buttony" onClick={handlePrint}>Prnt</button>
     </div>
-  );
-}
-
-//Should be put in review
-function EditCards({cards, setCards, setPage}){
-  const [flip, setFlip] = useState(true);
-  const [index, setIndex] = useState(0);
-  const [isEdit, setIsEdit] = useState(false);
-  const handleMain = () => {
-    setPage(0);
-  }
-
-  const handlePrint = () => {
-    for(let i = 0; i < cards.length; i++){
-      console.log(cards[i].front + " " + cards[i].back);
-    }
-  }
-
-
-
-  const handleFlip = () => {
-    setFlip(!flip);
-  }
-
-  const handleNext = () => {
-    if(cards.length > index + 1){
-      setIndex(index + 1);
-      setFlip(true);
-    } else{
-      console.log("at end");
-    }
-  }
-
-  const handleReturn = () => {
-    if(index > 0){
-      setIndex(index - 1);
-      setFlip(true);
-    }else{
-      console.log("At first card");
-    }
-  }  
-
-  const handleDelete = () => {
-    let c = [
-      ...cards
-    ];
-    for(let i = 0; i < c.length; i++){
-      console.log(c[i].front + " " + c[i].back);
-    }
-    c.splice(index, index+1);
-    for(let i = 0; i < c.length; i++){
-      console.log(c[i].front + " " + c[i].back);
-    }
-    setCards(cards => c);
-  } 
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const formJson = Object.fromEntries(formData.entries());
-    let newCard = new createFlashcard(formJson.front, formJson.back);
-    let arr = cards;
-    arr[index] = newCard;
-    setCards(cards => arr);
-    setIsEdit(false);
-  }
-
-  const handleEdit = () => {
-    setIsEdit(true);
-  } 
-
-  function displayCard(){
-    if(cards.length === 0){
-      console.log("No cards");
-      return;
-    }
-    if(flip){
-      return cards[index].front;
-    }else{
-      return cards[index].back;
-    }
-  }
-
-  return(
-    <div>
-      <div className="card">
-        { <h4><b>{displayCard()}</b></h4> }
-      </div>
-      {isEdit?(
-             <div>
-             <form method="post" onSubmit={handleSubmit}>
-               <label>
-                 Front of the card: <input name="front" defaultValue={cards[index].front}/>
-               </label>
-               <label>
-                 Back of the card: <input name="back" defaultValue={cards[index].back}/>
-               </label>
-               <button type="submit">Submit form</button>
-             </form>
-           </div>
-          ) : (
-            <></>
-          )}
-      <div>
-        {<h4></h4>}
-      </div>
-
-          <button className="buttony" onClick={handleFlip}>Flip</button>
-          <button className="buttony" onClick={handleNext}>Next</button>
-          <button className="buttony" onClick={handleReturn}>Return</button>
-          <button className="buttony" onClick={handleDelete}>Delete</button>
-          <button className="buttony" onClick={handleEdit}>Edit</button>
-        
-        <button className="buttony" onClick={handlePrint}>Print</button>
-        <button className="buttony" onClick={handleMain}>Main Page</button>
-    </div>
-
   );
 }
 
