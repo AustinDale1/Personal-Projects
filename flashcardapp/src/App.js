@@ -107,9 +107,6 @@ function createFlashcard(front, back){
 
 //Probably should combine with uploads
 function Create({cards, setCards, cards2, setCards2, setPage}){
-  const handleClear = () => {
-      setCards([]);
-    }
 
     const handleMain = () => {
       setPage(0);
@@ -138,20 +135,19 @@ function Create({cards, setCards, cards2, setCards2, setPage}){
     }
 
   return(
-    
-      <div>
-          <form method="post" onSubmit={handleSubmit}>
-      <label>
-        Front of the card: <input name="front" />
-      </label>
-      <label>
-        Back of the card: <input name="back" />
-      </label>
-      <button type="submit">Submit form</button>
-    </form>
-    <button className="buttony" onClick={handleClear}>Clear</button>
-    <button className="buttony" onClick={handleMain}>Main Page</button>
-      </div>
+    <div className="createForm">
+      <h2>Create New Flashcard</h2>
+      <form method="post" onSubmit={handleSubmit}>
+        <label>
+          <input name="front" defaultValue={"Front"}/>
+        </label>
+        <label>
+          <input name="back" defaultValue={"Back"}/>
+        </label>
+        <button type="submit" className="createButton">Submit form</button>
+      </form>
+      <button className="buttony" onClick={handleMain}>Main Page</button>
+    </div>
   );
 }
 
@@ -272,9 +268,6 @@ function BulkUpload({cards, setCards, cards2, setCards2, setPage}){
   const handleMain = () => {
     setPage(0);
   }
-  const handleClear = () => {
-    setCards([]);
-  }
 
   const handlePrint = () => {
     let index = 0;
@@ -327,20 +320,20 @@ function BulkUpload({cards, setCards, cards2, setCards2, setPage}){
   }
 
   return(
-    <div>
+    <div className='BulkCreateForm'>
       <form method="post" onSubmit={handleSubmit}>
-      <label>
-        Enter flashcards like this "front:back" then use newlines for subsequent flashcards
-        <textarea
-          id="postContent"
-          name="postContent"
-          rows={4}
-          cols={40}
-        />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
-      <button className="buttony" onClick={handleClear}>Clear</button>
+        <label>
+          <h2>Create Flashcard</h2>
+          <textarea
+            id="postContent"
+            name="postContent"
+            rows={4}
+            cols={40}
+            defaultValue={"Front:Back\nFront:Back"}
+          />
+        </label>
+        <button type="submit" className="buttony">Submit</button>
+      </form>
       <button className="buttony" onClick={handleMain}>Main Page</button>
       <button className="buttony" onClick={handlePrint}>Prnt</button>
     </div>
@@ -365,7 +358,6 @@ function FileUpload({cards, setCards, setPage}){
       index++;
     }
   }
-
 
   function handleSubmission(e) {
     const reader = new FileReader();
@@ -398,7 +390,7 @@ function FileUpload({cards, setCards, setPage}){
   }
 
   return(
-    <div>
+    <div className='FileUpload'>
       <div>
         <label htmlFor={"filerInput"} className="filerinput">
           <input type="file" name="file" id={"filerInput"} onChange={changeHandler}/>
@@ -412,12 +404,11 @@ function FileUpload({cards, setCards, setPage}){
               <p>Filetype: {selectedFile.type}</p>
             </div>
           ) : (
-            <p>Select a .txt file</p>
+            null
           )}
 			  </div>
 		</div>
 
-      <button className="buttony" onClick={handleClear}>Clear</button>
       <button className="buttony" onClick={handleMain}>Main Page</button>
       <button className="buttony" onClick={handlePrint}>Prnt</button>
     </div>
