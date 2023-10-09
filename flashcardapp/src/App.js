@@ -16,15 +16,6 @@ function Landing(){
   const [page, setPage] = useState(0);
   const [cardset, setCardset] = useState(0);
 
-  //Mainly for testing purposes, not in use currently
-  const handlePrint = () => {
-      let index = 0;
-      while(index < cards.length){
-        console.log("Front: " + cards[index].front + " Back: " + cards[index].back);
-        index++;
-      } 
-    }
-
   const handleCreateClick = () => {
       setPage(1);
     }
@@ -64,7 +55,6 @@ function Landing(){
               <button className="button" onClick={handleReviewClick}>Review flashcards</button>    
               <button className="button" onClick={handleBulkClick}>Create flashcards in bulk</button>  
               <button className="button" onClick={handleFileClick}>Create flashcards using file</button>
-              {/* <button className="button" onClick={handlePrint}>Print</button>         */}
           </>
           );
       }
@@ -110,15 +100,6 @@ function Create({cards, setCards, cards2, setCards2, setPage}){
 
     const handleMain = () => {
       setPage(0);
-    }
-  
-    //Against for testing purposes, not in use currently
-    const handlePrint = () => {
-      let index = 0;
-      while(index < cards.length){
-        console.log("Front: " + cards[index].front + " Back: " + cards[index].back);
-        index++;
-      }
     }
 
     function handleSubmit(e) {
@@ -212,6 +193,7 @@ function Review({cards, setCards, cards2, setCards2, setPage}){
   const handleShuffle = () => {
     setCards(cards.sort(() => (Math.random() > .5) ? 1 : -1));
     setIndex(0);
+    setFlip(true);
   }
 
   const handleMain = () => {
@@ -242,7 +224,7 @@ function Review({cards, setCards, cards2, setCards2, setPage}){
             <button className="cardButtonEdit" onClick={handleEdit}>Edit</button>
           </div>
           {isEdit?(
-             <div>
+             <div className="createForm">
              <form method="post" onSubmit={handleSubmit}>
                <label>
                  Front of the card: <input name="front" defaultValue={cards[index].front}/>
@@ -250,7 +232,7 @@ function Review({cards, setCards, cards2, setCards2, setPage}){
                <label>
                  Back of the card: <input name="back" defaultValue={cards[index].back}/>
                </label>
-               <button type="submit">Submit form</button>
+               <button type="submit" className="Gonnahavetofixthiscodelater">Submit form</button>
              </form>
            </div>
           ) : (
@@ -259,7 +241,8 @@ function Review({cards, setCards, cards2, setCards2, setPage}){
       <div>
         {<h4></h4>}
       </div>
-          <button className="mainButton" onClick={handleMain}>Main Page</button>
+          <button className="buttony" onClick={handleMain}>Main Page</button>
+          <button className="buttony" >Download</button>
       </div>
   );
 }
@@ -269,33 +252,12 @@ function BulkUpload({cards, setCards, cards2, setCards2, setPage}){
     setPage(0);
   }
 
-  const handlePrint = () => {
-    let index = 0;
-    while(index < cards.length){
-      console.log("Front: " + cards[index].front + " Back: " + cards[index].back);
-      index++;
-    }
-  }
-
-  function addToCards(a, b){
-    console.log(a + " " + b);
-    setCards(
-      [
-        ...cards,
-        new createFlashcard(a, b)
-      ]
-    );
-  }
   function handleSubmit(e) {
     e.preventDefault();
-    //console.log(document.getElementById("postContent").value + "aaaa");
     const arr = document.getElementById("postContent").value.split("\n");
     let c = [];
     for(let i = 0; i < arr.length; i++){
       let a = arr[i].split(":");
-      // console.log(a[0] + " " + a[1]);
-      // console.log("cards is " + cards);
-      //addToCards(a[0], a[1]);
       c = [
         ...c,
         new createFlashcard(a[0], a[1])
@@ -308,15 +270,6 @@ function BulkUpload({cards, setCards, cards2, setCards2, setPage}){
         ...c
        ]
       );
-     console.log("next");
-    //here
-    // setCards( 
-    //   [ 
-    //       ...cards, 
-    //       //fix here
-    //     new createFlashcard(formJson.front, formJson.back)
-    //   ]
-    // );
   }
 
   return(
@@ -335,7 +288,6 @@ function BulkUpload({cards, setCards, cards2, setCards2, setPage}){
         <button type="submit" className="buttony">Submit</button>
       </form>
       <button className="buttony" onClick={handleMain}>Main Page</button>
-      <button className="buttony" onClick={handlePrint}>Prnt</button>
     </div>
 );
 }
@@ -346,9 +298,6 @@ function FileUpload({cards, setCards, setPage}){
 
   const handleMain = () => {
     setPage(0);
-  }
-  const handleClear = () => {
-    setCards([]);
   }
 
   const handlePrint = () => {

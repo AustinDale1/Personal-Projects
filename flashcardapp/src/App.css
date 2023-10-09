@@ -1,41 +1,202 @@
-.main{
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-}
+/* Generic code */
+    body {
+        background-color:#f8f8f8;
+    }
 
-.mainButton{
-    float: left;
-}
+    .main{
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
 
-.button  {
-	height: 373px;
-	width: 210px;
-	color: #000000;
-	background-color: transparent;
-	cursor: pointer;
-    border-radius: 8px;
-}
+    .buttony  {
+        height: 100px;
+        width: 100px;
+        color: #000000;
+        background-color: transparent;
+        cursor: pointer;
+        border-radius: 8px;
+    }
 
-.buttony  {
-	height: 100px;
-	width: 100px;
-	color: #000000;
-	background-color: transparent;
-	cursor: pointer;
-    border-radius: 8px;
-}
+    .buttony:hover {background-color: #ececec}
 
-.button:hover {background-color: #ccf1ff}
+    .buttony:active {
+        background-color: #a8a8a8;
+        color: #ffffff;
+    }
 
-.button:active {
-    background-color: #053647;
-    color: #ffffff;
-  }
+/* Landing page code */
+    .button  {
+        height: 373px;
+        width: 210px;
+        color: #000000;
+        background-color: transparent;
+        cursor: pointer;
+        border-radius: 8px;
+    }
 
-  .buttony:hover {background-color: #ccf1ff}
+    .button:hover {background-color: #ececec}
 
-  .buttony:active {
-    background-color: #053647;
-    color: #ffffff;
-  }
+    .button:active {
+        background-color: #a8a8a8;
+        color: #ffffff;
+      }
+
+/* Create page code */
+    .createForm h2{
+        text-align: center;
+    }
+
+    .createForm input {
+        text-align: top;
+        height: 70px;
+        width: 100%;
+        background-color: transparent;
+        border-radius: 8px;
+    }
+
+    .createButton{
+        float: right;
+        border-radius: 8px;
+        background-color: transparent;
+        right: 0px;
+        left: 0px;
+        left: 300px;
+        width: 130px;
+        height: 80px;
+    }
+
+    .createButton:hover {background-color: #ececec}
+
+/* Review page code */
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        padding: 100px 10px;
+        text-align: center;
+        padding: 90px 50px;
+        font-size:xx-large;
+        background-color: rgb(255, 255, 255);
+        position: relative;
+        height: 200px;
+    }
+
+    .cardButtonRight {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        height: 100%;
+        width: 20%;
+        background-color: transparent;
+        border: none;
+        font-size: xx-large;
+    }
+
+    .cardButtonLeft {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        height: 100%;
+        width: 20%;
+        background-color: transparent;
+        border: none;
+        font-size: xx-large;
+    }
+
+    .cardButtonFlip {
+        position: absolute;
+        left: 20%;
+        right: 20%;
+        bottom: 0px;
+        height: 30%;
+        width: 60%;
+        background-color: transparent;
+        border: none;
+        font-size: xx-large;
+    }
+
+    .cardButtonShuffle {
+        position: absolute;
+        top: 0px;
+        left: 20%;
+        height: 15%;
+        width: 20%;
+        background-color: transparent;
+        border: none;
+        font-size: large;
+    }
+
+    .cardButtonEdit {
+        position: absolute;
+        left: 40%;
+        top: 0px;
+        height: 15%;
+        width: 20%;
+        background-color: transparent;
+        border: none;
+        font-size: large;
+    }
+
+    .cardButtonDelete {
+        position: absolute;
+        left: 60%;
+        top: 0px;
+        height: 15%;
+        width: 20%;
+        background-color: transparent;
+        border: none;
+        font-size: large;
+    }
+
+    .Gonnahavetofixthiscodelater{
+        float: right;
+        border-radius: 8px;
+        background-color: transparent;
+        right: 0px;
+        left: 0px;
+        left: 300px;
+        width: 130px;
+        height: 80px;
+    }
+
+    .cardButtonRight:hover {background-color: #ececec}
+    .cardButtonLeft:hover {background-color: #ececec}
+    .cardButtonFlip:hover {background-color: #ececec}
+    .cardButtonShuffle:hover {background-color: #ececec}
+    .cardButtonEdit:hover {background-color: #ececec}
+    .cardButtonDelete:hover {background-color: #ff0000}
+
+/* Bulk page code */
+    .BulkCreateForm {
+        text-align: center;
+    }
+
+    .BulkCreateForm textarea{
+        height: 100px;
+        width: 60%;
+        color: #000000;
+        background-color: transparent;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+
+/* File page code */
+    .filerinput {
+        height: 100px;
+        width: 100px;
+        color: #000000;
+        background-color: transparent;
+        border-radius: 8px;
+    }
+    
+    .FileUpload {
+        color:blue;
+    }
+
+    .FileUpload label{
+        color: red;
+    }
+
+    .FileUpload label{
+        color: red;
+    }
