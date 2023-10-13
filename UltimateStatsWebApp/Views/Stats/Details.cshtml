@@ -1,0 +1,54 @@
+﻿@model UltimateStatsWebApp.Models.Stats
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Stats</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Catches)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Catches)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Throws)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Throws) 
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GameNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GameNumber) 
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamScore)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TeamScore)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OpponentScore)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OpponentScore)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
