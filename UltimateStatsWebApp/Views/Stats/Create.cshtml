@@ -1,4 +1,5 @@
-﻿@model UltimateStatsWebApp.Models.Stats
+﻿using Microsoft.AspNetCore.Identity;
+@model UltimateStatsWebApp.Models.Stats
 
 @{
     ViewData["Title"] = "Create";
@@ -41,6 +42,11 @@
                 <label asp-for="OpponentScore" class="control-label"></label>
                 <input asp-for="OpponentScore" class="form-control" />
                 <span asp-validation-for="OpponentScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="userName" class="control-label" style="display: none;"></label>
+                <input asp-for="userName" class="form-control" value=@User.Identity?.Name style="display: none;" />
+                <span asp-validation-for="userName" class="text-danger" style="display: none;"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

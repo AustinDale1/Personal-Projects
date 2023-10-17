@@ -38,7 +38,7 @@
             @Html.DisplayNameFor(model => model.TeamScore)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TeamScore)
+            @Html.DisplayFor(model => model.TeamScore) 
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OpponentScore)
@@ -46,9 +46,17 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.OpponentScore)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.userName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.userName)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    @if (Model.userName == User.Identity?.Name) {
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+    }
     <a asp-action="Index">Back to List</a>
 </div>

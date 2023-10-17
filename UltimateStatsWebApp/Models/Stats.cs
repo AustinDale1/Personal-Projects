@@ -1,4 +1,6 @@
-﻿namespace UltimateStatsWebApp.Models
+﻿using System.Dynamic;
+
+namespace UltimateStatsWebApp.Models
 {
     public class Stats
     {
@@ -13,6 +15,9 @@
         public string TeamScore { get; set; }
 
         public string OpponentScore { get; set; }
+
+        public string userName { get; set; }
+
 
         public Stats()
         {

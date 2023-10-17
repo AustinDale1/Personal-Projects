@@ -44,6 +44,11 @@
                 <span asp-validation-for="OpponentScore" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="userName" class="control-label" style="display: none;"></label>
+                <input asp-for="userName" class="form-control" style="display: none;" />
+                <span asp-validation-for="userName" class="text-danger" style="display: none;"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UltimateStatsWebApp.Data;
 using UltimateStatsWebApp.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace UltimateStatsWebApp.Controllers
 {
@@ -23,9 +24,9 @@ namespace UltimateStatsWebApp.Controllers
         // GET: Stats
         public async Task<IActionResult> Index()
         {
-              return _context.Stats != null ? 
-                          View(await _context.Stats.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Stats'  is null.");
+            return _context.Stats != null ?
+                        View(await _context.Stats.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Stats'  is null.");
         }
 
         // GET: Stats/Details/5
@@ -59,7 +60,7 @@ namespace UltimateStatsWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Catches,Throws, GameNumber, Category, TeamScore, OpponentScore\t")] Stats stats)
+        public async Task<IActionResult> Create([Bind("Id,Catches,Throws, GameNumber, Category, TeamScore, OpponentScore, userName\t")] Stats stats)
         {
             if (ModelState.IsValid)
             {
@@ -72,9 +73,9 @@ namespace UltimateStatsWebApp.Controllers
 
         // GET: Stats/Edit/5
         [Authorize]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, string userName)
         {
-            if (id == null || _context.Stats == null)
+            if (id == null || _context.Stats == null || userName != User.Identity?.Name)
             {
                 return NotFound();
             }
@@ -93,7 +94,7 @@ namespace UltimateStatsWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Catches,Throws, GameNumber, Category, TeamScore, OpponentScore")] Stats stats)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Catches,Throws, GameNumber, Category, TeamScore, OpponentScore, userName")] Stats stats)
         {
             if (id != stats.Id)
             {
@@ -125,9 +126,10 @@ namespace UltimateStatsWebApp.Controllers
 
         // GET: Stats/Delete/5
         [Authorize]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, string userName)
         {
-            if (id == null || _context.Stats == null)
+            
+            if (id == null || _context.Stats == null || userName != User.Identity?.Name)
             {
                 return NotFound();
             }
