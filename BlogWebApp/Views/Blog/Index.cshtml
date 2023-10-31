@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BlogWebApp.Models.Blog>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Blogs</h1>
+
+<p>
+    @{
+        if (User.Identity?.Name != null)
+        {
+            <a asp-action="Create">Create blog</a>
+        }
+    }
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@{
+foreach (var item in Model) {
+
+    if(item != null){
+            <tr onclick="window.location='/Blog/Details/@item.Id';" style="cursor: pointer">
+                <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            </tr>
+}
+        }
+}
+    </tbody>
+</table>

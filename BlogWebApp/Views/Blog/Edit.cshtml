@@ -1,0 +1,53 @@
+﻿@model BlogWebApp.Models.Blog
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit blog</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Author" class="control-label" style="display: none;"></label>
+                <input asp-for="Author" class="form-control" style="display: none;" />
+                <span asp-validation-for="Author" class="text-danger" style="display: none;"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea rows="6" cols="100" asp-for="Content" class="contentInput"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label" style="display: none;"></label>
+                <input asp-for="CreatedDate" class="form-control" style="display: none;" />
+                <span asp-validation-for="CreatedDate" class="text-danger" style="display: none;"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastUpdated" class="control-label" style="display: none;"></label>
+                <input asp-for="LastUpdated" class="form-control" style="display: none;" />
+                <span asp-validation-for="LastUpdated" class="text-danger" style="display: none;"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

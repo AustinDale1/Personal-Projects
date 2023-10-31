@@ -1,0 +1,26 @@
+﻿@model BlogWebApp.Models.Blog
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Html.DisplayFor(model => model.Title)</h1>
+<h3>@Html.DisplayFor(model => model.Author)</h3>
+<p>@Html.DisplayFor(model => model.CreatedDate), edited @Html.DisplayFor(model => model.LastUpdated)</p>
+<div class="contentP">
+    <p>@Html.DisplayFor(model => model.Content)</p>
+</div>
+
+
+<div>
+    @if (Model.Author == User.Identity?.Name)
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id" asp-route-author="@Model?.Author">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model?.Id" asp-route-author="@Model?.Author">Delete</a>
+    }
+
+    @{
+        //<button onclick="window.location='/Blog/Details/@(Model.Id-1)';">Previous</button>
+        //<button onclick="window.location='/Blog/Details/@(Model.Id+1)';">Next</button>
+    }
+</div>
