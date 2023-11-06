@@ -52,15 +52,12 @@ namespace BlogWebApp.Controllers
             {
                 return NotFound();
             }
-            //I don't understand what these two lines do
-            Console.WriteLine(id + " is what id is");
+
             var blog = await _context.Blog
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            Console.WriteLine(id + " is what id is 2");
             if (blog == null)
             {
-                Console.WriteLine("Its null again ");
                 return NotFound();
             }
 
@@ -91,6 +88,8 @@ namespace BlogWebApp.Controllers
             {
                 _context.Add(blog);
                 await _context.SaveChangesAsync();
+
+
                 return RedirectToAction(nameof(Index));
             }
             return View(blog);
@@ -150,6 +149,7 @@ namespace BlogWebApp.Controllers
                         throw;
                     }
                 }
+                Console.WriteLine(nameof(Index));
                 return RedirectToAction(nameof(Index));
             }
             return View(blog);
