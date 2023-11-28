@@ -25,6 +25,16 @@
         color: #ffffff;
     }
 
+    .createButton{
+        border-radius: 8px;
+        background-color: transparent;
+        float: right;
+        width: 20%;
+        height: 80px;
+    }
+
+    .createButton:hover {background-color: #ececec}
+
 /* Landing page code */
     .button  {
         height: 373px;
@@ -55,21 +65,9 @@
         border-radius: 8px;
     }
 
-    .createButton{
-        float: right;
-        border-radius: 8px;
-        background-color: transparent;
-        right: 0px;
-        left: 0px;
-        left: 300px;
-        width: 130px;
-        height: 80px;
-    }
-
-    .createButton:hover {background-color: #ececec}
-
 /* Review page code */
     .card {
+        word-wrap: break-word;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         transition: 0.3s;
         padding: 100px 10px;
@@ -79,6 +77,16 @@
         background-color: rgb(255, 255, 255);
         position: relative;
         height: 200px;
+    }
+
+    .cardText{
+        width: 60%;
+        text-align: center;
+        left: 20%;
+        right: 20%;
+        top: 20%;
+        bottom: 20%;
+        position: absolute;
     }
 
     .cardButtonRight {
@@ -164,7 +172,7 @@
     .cardButtonFlip:hover {background-color: #ececec}
     .cardButtonShuffle:hover {background-color: #ececec}
     .cardButtonEdit:hover {background-color: #ececec}
-    .cardButtonDelete:hover {background-color: #ff0000}
+    .cardButtonDelete:hover {color: #ff0000; background-color: #ececec}
 
 /* Bulk page code */
     .BulkCreateForm {
@@ -173,7 +181,7 @@
 
     .BulkCreateForm textarea{
         height: 100px;
-        width: 60%;
+        width: 100%;
         color: #000000;
         background-color: transparent;
         cursor: pointer;
@@ -182,21 +190,26 @@
 
 /* File page code */
     .filerinput {
+        display: flex;
         height: 100px;
         width: 100px;
         color: #000000;
         background-color: transparent;
         border-radius: 8px;
+        cursor: pointer;
     }
+
+    .filerinput:hover {background-color: #ececec}
     
-    .FileUpload {
-        color:blue;
+    .FileUpload label{
+        height: 100px;
+        width: 100px;
+        color: #000000;
+        text-align: center;
+        background-color: transparent;
+        cursor: pointer;
+        border-radius: 8px;
+        border: 2px solid #000000;
     }
 
-    .FileUpload label{
-        color: red;
-    }
-
-    .FileUpload label{
-        color: red;
-    }
+    .FileUpload label:hover {background-color: #ececec}
